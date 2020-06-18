@@ -16,6 +16,6 @@ import java.util.List;
 public class ListResult {
     public int code;
     public String msg;
-    public List<Post> obj;
+    public List<Object> obj;
 
 }

@@ -14,5 +14,4 @@ public class ObjectResult {
     public int code;
     public String msg;
     public Object obj;
-  // generic으로 만들어보기
 }

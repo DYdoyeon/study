@@ -27,66 +27,60 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    public ResponseEntity<?> getAllPost(int status){
-
-        return new ResponseEntity<>(
-                ListResult.builder()
-                        .code(status)
-                        .msg("success")
-                        .obj(boardRepository.findAll())
-                        .build(), HttpStatus.OK
-        );
+    public ListResult getAllPost(int status){
+        ListResult listResult = new ListResult();
+        listResult.setMsg("success");
+        listResult.setCode(status);
+        listResult.setObj(boardRepository.findAll());
+        return listResult;
     }
 
-    public ResponseEntity<?> getPost(int status, Long id){
-        return new ResponseEntity<>(
-                ObjectResult.builder()
-                        .code(status)
-                        .msg("success")
-                        .obj(boardRepository.findById(id))
-                        .build(), HttpStatus.OK
-        );
+    public ObjectResult getPost(int status, Long id){
+
+        ObjectResult objectResult = new ObjectResult();
+        objectResult.setMsg("success");
+        objectResult.setCode(status);
+        objectResult.setObj(boardRepository.findById(id));
+        return objectResult;
     }
 
 
-    public ResponseEntity<?> writePost (int status,Post post){
+    public ObjectResult writePost (int status,Post post){
+
         boardRepository.save(post);
-        return new ResponseEntity<>(
-                ObjectResult.builder()
-                        .code(status)
-                        .msg("success")
-                        .obj("")
-                        .build(), HttpStatus.OK
-        );
+        ObjectResult objectResult = new ObjectResult();
+
+        objectResult.setMsg("success");
+        objectResult.setCode(status);
+        return objectResult;
+
     }
 
     // Update Post
     // Update Post
-    public  ResponseEntity<?> updatePost (int status ,Post post) {
+    public  ObjectResult updatePost (int status ,Post post) {
 
         boardRepository.update(post);
 
-        return new ResponseEntity<>(
-                ObjectResult.builder()
-                        .code(status)
-                        .msg("success")
-                        .obj("")
-                        .build(),HttpStatus.OK
-        );
+        ObjectResult objectResult = new ObjectResult();
+
+        objectResult.setMsg("success");
+        objectResult.setCode(status);
+        return objectResult;
 
     }
 
 
     // Delete Post
     @DeleteMapping("/list/{id}")
-    public ResponseEntity deletePost( int status ,Long id) throws Exception {
+    public ListResult deletePost( int status ,Long id) throws Exception {
         boardRepository.delete(id);
-        return new ResponseEntity<>(
-                ObjectResult.builder()
-                    .code(status)
-                    .msg("success")
-                    .obj("")
-                    .build(),HttpStatus.OK
-        );
+
+        ListResult listResult = new ListResult();
+        listResult.setMsg("success");
+        listResult.setCode(status);
+        listResult.setObj(boardRepository.findAll());
+        return listResult;
+
     }
 }

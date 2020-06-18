@@ -29,30 +29,30 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> getAllPost(HttpServletResponse response) {
+    public ListResult getAllPost(HttpServletResponse response) {
 
         return boardService.getAllPost(response.getStatus());
     }
 
 
     @GetMapping("/list/{id}")
-    public ResponseEntity<?> getPost(HttpServletResponse response, @PathVariable Long id) {
+    public ObjectResult getPost(HttpServletResponse response, @PathVariable Long id) {
         return boardService.getPost(response.getStatus(), id);
     }
 
     @PostMapping("/write")
-    public ResponseEntity<?> writePost(HttpServletResponse response, @RequestBody Post post) {
+    public ObjectResult writePost(HttpServletResponse response, @RequestBody Post post) {
         return boardService.writePost(response.getStatus(), post);
     }
 
     @PatchMapping("/list")
-    public ResponseEntity<?> updatePost(HttpServletResponse response, @RequestBody Post post) throws Exception {
+    public ObjectResult updatePost(HttpServletResponse response, @RequestBody Post post) throws Exception {
         return boardService.updatePost(response.getStatus(), post);
     }
 
     // Delete Post
     @DeleteMapping("/list/{id}")
-    public ResponseEntity<?> deletePost(HttpServletResponse response, @PathVariable Long id) throws Exception {
+    public ListResult deletePost(HttpServletResponse response, @PathVariable Long id) throws Exception {
         return boardService.deletePost(response.getStatus(), id);
     }
 }
